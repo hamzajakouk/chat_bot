@@ -41,7 +41,7 @@ elif uploaded_files:
   sources = textify_output[1]
   
   #extract embeddings
-  embeddings = OpenAIEmbeddings(openai_api_key = st.secrets["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"])
+  embeddings = OpenAIEmbeddings(openai_api_key = st.secrets["openai_api_key"])
   #vstore with metadata. Here we will store page numbers.
   vStore = Chroma.from_texts(documents, embeddings, metadatas=[{"source": s} for s in sources])
   #deciding model
