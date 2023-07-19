@@ -62,7 +62,7 @@ def handle_userinput(user_question):
         else:
             st.write(bot_template.replace(
                 "{{MSG}}", message.content), unsafe_allow_html=True)
-
+    
 
 def main():
     load_dotenv()
@@ -76,10 +76,35 @@ def main():
         st.session_state.chat_history = None
 
     st.header("Chat with multiple PDFs :books:")
-    user_question = st.text_input("Ask a question about your documents:")
-    if user_question:
+
+    # Container for user input in the sidebar
+    st.sidebar.subheader("User Input")
+
+    
+
+    # Add a button to clear the user input
+    user_question = st.sidebar.text_area("Ask a question about your documents:", key="textarea_key")
+
+# Create a button that clears the input box
+
+    col1, col2 = st.sidebar.columns(2)
+
+    # Add the buttons in the respective columns
+    ##with col1:
+     #   clear_button = st.button("Clear Input")
+
+    with col1:
+        submit_button = st.button('Submit')
+
+    #if clear_button:
+    #    st.session_state.textarea_key = ""
+
+       
+
+    if submit_button:
         handle_userinput(user_question)
 
+    # Container for document upload and processing in the sidebar
     with st.sidebar:
         st.subheader("Your documents")
         pdf_docs = st.file_uploader(
@@ -96,9 +121,7 @@ def main():
                 vectorstore = get_vectorstore(text_chunks)
 
                 # create conversation chain
-                st.session_state.conversation = get_conversation_chain(
-                    vectorstore)
-
+                st.session_state.conversation = get_conversation_chain(vectorstore)
 
 if __name__ == '__main__':
     main()
