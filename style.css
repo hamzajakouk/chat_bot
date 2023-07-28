@@ -1,0 +1,16 @@
+/* Style the submit button with a specific background color etc */
+button[type=submit] {
+    background-color: #FF0000; /* Red color */
+    color: white;
+    padding: 16px 32px; /* Larger padding for a bigger button */
+    border: none;
+    border-radius: 8px; /* Larger border radius for rounded corners */
+    cursor: pointer;
+    display: block; /* Center the button horizontally */
+    margin: auto; /* Center the button vertically */
+}
+
+/* When moving the mouse over the submit button, add a darker red color */
+button[type=submit]:hover {
+    background-color: #8B0000;
+}
